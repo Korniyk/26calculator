@@ -1,4 +1,5 @@
 import tkinter as tk
+import doctest
 
 
 class CalculatorModel:
@@ -9,6 +10,30 @@ class CalculatorModel:
         self.expression += str(value)
 
     def evaluate_expression(self):
+        """
+        Обчислює вираз, що міститься в self.expression.
+
+        >>> calc = CalculatorModel()
+        >>> calc.expression = "2+3"
+        >>> calc.evaluate_expression()
+        5
+
+        >>> calc.expression = "10-4"
+        >>> calc.evaluate_expression()
+        6
+
+        >>> calc.expression = "6*3"
+        >>> calc.evaluate_expression()
+        18
+
+        >>> calc.expression = "8/2"
+        >>> calc.evaluate_expression()
+        4.0
+
+        >>> calc.expression = "10/0"  # Ділення на нуль
+        >>> calc.evaluate_expression()
+        'Помилка'
+        """
         try:
             result = eval(self.expression)
             self.expression = str(result)
@@ -110,3 +135,4 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = CalculatorApp(root)
     root.mainloop()
+    doctest.testmod()
